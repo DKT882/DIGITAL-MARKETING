@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DKT Marketing - Digital Growth Partner</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles and Theme Variables */
+        :root {
+            --primary-color: #4f46e5;
+            /* Indigo */
+            --accent-color: #22d3ee;
+            /* Cyan */
+            --dark-bg: #0f172a;
+            /* Slate 900 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 10% 20%, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 5px var(--accent-color), 0 0 10px rgba(34, 211, 238, 0.5);
+        }
+
+        .btn-primary {
+            @apply bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg shadow-indigo-500/50;
+        }
+
+        .stat-bar {
+            height: 10px;
+            background-color: var(--accent-color);
+            transition: width 1.5s ease-out;
+            border-radius: 9999px;
+            box-shadow: 0 0 5px var(--accent-color);
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeIn 1s ease-out both;
+        }
+
+        /* Apply animations on section load/scroll */
+        section {
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+        }
+
+        /* Sticky Header */
+        header {
+            transition: background-color 0.3s ease;
+        }
+
+        .scrolled {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Spinner for LLM loading state */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--dark-bg);
+            width: 1.5rem;
+            height: 1.5rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Typing Animation Cursor */
+        .typing-cursor {
+            display: inline-block;
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Parallax Elements */
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+            /* For smooth movement */
+        }
+
+        /* Cursor Tracking Circle */
+        .cursor-circle {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 1.5px solid var(--accent-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+            transition: opacity 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.4), inset 0 0 15px rgba(34, 211, 238, 0.1);
+        }
+
+        .cursor-circle-inner {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.15s ease;
+            box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
+        }
+
+        .cursor-circle.active {
+            opacity: 1;
+            animation: pulse-circle 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-circle {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), inset 0 0 30px rgba(34, 211, 238, 0.2);
+            }
+        }
+
+        /* Cursor Circle Hover States */
+        .cursor-circle.hovering {
+            border-color: #fbbf24;
+            width: 45px;
+            height: 45px;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.8), inset 0 0 20px rgba(251, 191, 36, 0.3);
+            animation: pulse-circle-hover 0.5s ease-in-out infinite !important;
+            transition: width 0.15s ease, height 0.15s ease, border-color 0.15s ease;
+        }
+
+        .cursor-circle.hovering .cursor-circle-inner {
+            transform: translate(-50%, -50%) scale(5.5);
+            background-color: #fbbf24;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
+        }
+
+        @keyframes pulse-circle-hover {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(251, 191, 36, 0.8), inset 0 0 20px rgba(251, 191, 36, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 45px rgba(251, 191, 36, 1), inset 0 0 30px rgba(251, 191, 36, 0.5);
+            }
+        }
+
+        .cursor-circle.hovering-accent {
+            border-color: #ec4899;
+            width: 55px;
+            height: 55px;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), inset 0 0 20px rgba(236, 72, 153, 0.3);
+            animation: pulse-circle-accent 0.5s ease-in-out infinite !important;
+            transition: width 0.15s ease, height 0.15s ease, border-color 0.15s ease;
+        }
+
+        .cursor-circle.hovering-accent .cursor-circle-inner {
+            transform: translate(-50%, -50%) scale(7);
+            background-color: #ec4899;
+            box-shadow: 0 0 12px rgba(236, 72, 153, 0.8);
+        }
+
+        @keyframes pulse-circle-accent {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), inset 0 0 20px rgba(236, 72, 153, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 45px rgba(236, 72, 153, 1), inset 0 0 30px rgba(236, 72, 153, 0.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#home" class="text-3xl font-extrabold text-white tracking-widest">
+                <span class="text-glow">DKT</span><span class="text-accent-color">.</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-accent-color transition duration-200">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-accent-color transition duration-200">About</a>
+                <a href="#work" class="text-gray-300 hover:text-accent-color transition duration-200">Our Work</a>
+                <a href="#sales" class="text-gray-300 hover:text-accent-color transition duration-200">Pricing</a>
+                <a href="#testimonials"
+                    class="text-gray-300 hover:text-accent-color transition duration-200">Testimonials</a>
+                <a href="#contact" class="text-gray-300 hover:text-accent-color transition duration-200">Contact Us</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-accent-color focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800/90 py-4 border-t border-slate-700">
+            <a href="#home" class="block px-4 py-2 text-white hover:bg-slate-700 transition duration-200">Home</a>
+            <a href="#about" class="block px-4 py-2 text-white hover:bg-slate-700 transition duration-200">About</a>
+            <a href="#work" class="block px-4 py-2 text-white hover:bg-slate-700 transition duration-200">Our Work</a>
+            <a href="#sales" class="block px-4 py-2 text-white hover:bg-slate-700 transition duration-200">Pricing</a>
+            <a href="#testimonials"
+                class="block px-4 py-2 text-white hover:bg-slate-700 transition duration-200">Testimonials</a>
+            <a href="#contact" class="block px-4 py-2 text-white hover:bg-slate-700 transition duration-200">Contact
+                Us</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home"
+        class="hero-gradient pt-32 pb-24 lg:pt-40 lg:pb-32 min-h-screen flex items-center relative overflow-hidden">
+
+        <!-- Parallax Background Glow Elements (Move against cursor) -->
+        <div id="glow-1"
+            class="parallax-element absolute bg-indigo-500/30 rounded-full blur-3xl w-48 h-48 -top-10 -left-10 z-0">
+        </div>
+        <div id="glow-2"
+            class="parallax-element absolute bg-accent-color/30 rounded-full blur-3xl w-64 h-64 top-1/2 right-0 -translate-y-1/2 z-0">
+        </div>
+        <div id="glow-3"
+            class="parallax-element absolute bg-indigo-700/50 rounded-full blur-3xl w-40 h-40 bottom-10 left-1/3 z-0">
+        </div>
+
+        <div id="hero-content"
+            class="parallax-element max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <!-- Hero Content -->
+            <div class="animate-in" style="animation-delay: 0.1s;">
+                <p class="text-lg font-medium text-accent-color uppercase tracking-wider mb-3">Scale Your Vision.
+                    Maximize ROI.</p>
+
+                <!-- UPDATED HERO HEADLINE WITH TYPING EFFECT -->
+                <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight text-white mb-6">
+                    Digital Marketing That <span class="text-indigo-400">Delivers Real</span> <span class="text-glow">
+                        <span id="dynamic-typing-text"></span>
+                        <span class="typing-cursor text-accent-color">|</span>
+                    </span>.
+                </h1>
+                <!-- END UPDATED HERO HEADLINE -->
+
+                <p class="text-xl text-gray-400 mb-10 max-w-lg">
+                    At dkt\_marketing.com, we specialize in data-driven strategies for SEO, PPC, and content that
+                    convert visitors into loyal customers. Let's build your digital empire.
+                </p>
+                <a href="#contact" class="btn-primary animate-in" style="animation-delay: 0.3s;">
+                    Start Your Free Audit Today
+                </a>
+            </div>
+
+            <!-- Stats & Graph/Fact Visualization -->
+            <div class="space-y-8 animate-in p-6 bg-slate-800/70 rounded-xl shadow-2xl" style="animation-delay: 0.5s;">
+                <h2 class="text-2xl font-bold text-white border-b border-indigo-500 pb-2">Our Performance Facts &
+                    Figures</h2>
+
+                <!-- Stat 1: ROI -->
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-lg font-medium text-gray-300">Avg. Client ROI Improvement</span>
+                        <span class="text-xl font-bold text-accent-color">345%</span>
+                    </div>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div id="stat-roi" class="stat-bar w-[0%]" data-width="85%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">Global average is typically 150-200%.</p>
+                </div>
+
+                <!-- Stat 2: Traffic -->
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-lg font-medium text-gray-300">Client Organic Traffic Growth (YOY)</span>
+                        <span class="text-xl font-bold text-accent-color">120%</span>
+                    </div>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div id="stat-traffic" class="stat-bar w-[0%]" data-width="70%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">Sustainable growth driven by proprietary SEO techniques.</p>
+                </div>
+
+                <!-- Graph/Fact: Conversion Rate (Simulated Bar Chart) -->
+                <div class="pt-4">
+                    <h3 class="text-xl font-semibold text-white mb-4">Conversion Rate Comparison</h3>
+                    <div class="flex items-end h-40 space-x-4">
+                        <div
+                            class="flex flex-col items-center justify-end h-full w-1/3 p-1 bg-slate-700 rounded-t-lg transition duration-700 hover:bg-indigo-600/50">
+                            <span class="text-sm font-bold text-gray-300 mb-2">3.2%</span>
+                            <div id="bar-industry" class="w-full bg-indigo-500 rounded-t-lg"
+                                style="height: 32%; transition: height 1s ease-out;"></div>
+                            <span class="text-xs text-gray-400 mt-1">Industry Avg</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-end h-full w-1/3 p-1 bg-slate-700 rounded-t-lg transition duration-700 hover:bg-indigo-600/50">
+                            <span class="text-sm font-bold text-white mb-2">5.5%</span>
+                            <div id="bar-dkt" class="w-full bg-accent-color rounded-t-lg"
+                                style="height: 55%; transition: height 1.2s ease-out;"></div>
+                            <span class="text-xs text-gray-400 mt-1">DKT Standard</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-end h-full w-1/3 p-1 bg-slate-700 rounded-t-lg transition duration-700 hover:bg-indigo-600/50">
+                            <span class="text-sm font-bold text-gray-300 mb-2">8.1%</span>
+                            <div id="bar-top" class="w-full bg-indigo-700 rounded-t-lg"
+                                style="height: 81%; transition: height 1.4s ease-out;"></div>
+                            <span class="text-xs text-gray-400 mt-1">Top Clients</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 lg:py-32 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-in">
+                <h2 class="text-4xl font-extrabold text-white sm:text-5xl">Who We Are</h2>
+                <p class="mt-4 text-xl text-gray-400">A results-obsessed team dedicated to your digital success.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Mission -->
+                <div class="p-6 rounded-xl bg-slate-800 shadow-2xl animate-in" style="animation-delay: 0.2s;">
+                    <div class="text-indigo-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Our Mission</h3>
+                    <p class="text-gray-400">To democratize sophisticated digital strategies, making cutting-edge
+                        marketing accessible and effective for businesses of all sizes on the path to becoming market
+                        leaders.</p>
+                </div>
+
+                <!-- Expertise -->
+                <div class="p-6 rounded-xl bg-slate-800 shadow-2xl animate-in" style="animation-delay: 0.4s;">
+                    <div class="text-indigo-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 0012 21.018a12.001 12.001 0 008.618-18.04z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Our Expertise</h3>
+                    <p class="text-gray-400">We hold certifications in Google Ads, Meta Business, and advanced HubSpot
+                        marketing automation. Our team members have an average of 8 years of industry experience,
+                        ensuring top-tier execution.</p>
+                </div>
+
+                <!-- Philosophy -->
+                <div class="p-6 rounded-xl bg-slate-800 shadow-2xl animate-in" style="animation-delay: 0.6s;">
+                    <div class="text-indigo-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7V5a2 2 0 012-2h12a2 2 0 012 2v2">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Data-First Philosophy</h3>
+                    <p class="text-gray-400">Every campaign is rooted in deep analytical insights. We don't guess; we
+                        test, measure, and optimize, ensuring every marketing dollar yields measurable returns (MQLs,
+                        SQLs, and Revenue).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Work Section (Portfolio Showcase) -->
+    <section id="work" class="py-24 lg:py-32 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-in">
+                <h2 class="text-4xl font-extrabold text-white sm:text-5xl">Recent Success Stories</h2>
+                <p class="mt-4 text-xl text-gray-400">Real results we’ve delivered for our partners across diverse
+                    industries.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Case Study 1 -->
+                <div class="p-6 rounded-xl bg-slate-800 shadow-xl transition duration-300 hover:shadow-cyan-500/30 animate-in"
+                    style="animation-delay: 0.2s;">
+                    <p class="text-sm font-semibold text-accent-color mb-2">E-COMMERCE & RETAIL</p>
+                    <h3 class="text-2xl font-bold text-white mb-4">The 'Swift' Campaign</h3>
+                    <p class="text-gray-400 mb-4">Implemented a full-funnel paid social strategy for a luxury goods
+                        retailer, optimizing ad creatives daily based on purchase intent signals.</p>
+                    <p class="text-lg font-bold text-white">Result: <span class="text-indigo-400">+180%</span> Revenue
+                        Growth in 6 months.</p>
+                </div>
+
+                <!-- Case Study 2 -->
+                <div class="p-6 rounded-xl bg-slate-800 shadow-xl transition duration-300 hover:shadow-cyan-500/30 animate-in"
+                    style="animation-delay: 0.4s;">
+                    <p class="text-sm font-semibold text-accent-color mb-2">B2B SAAS & TECH</p>
+                    <h3 class="text-2xl font-bold text-white mb-4">The 'Insight' Project</h3>
+                    <p class="text-gray-400 mb-4">Relaunched the SEO strategy with a focus on high-intent, long-tail
+                        keywords. Built an authority backlink profile from top-tier publications.</p>
+                    <p class="text-lg font-bold text-white">Result: <span class="text-indigo-400">+350%</span> Organic
+                        Lead Generation.</p>
+                </div>
+
+                <!-- Case Study 3 -->
+                <div class="p-6 rounded-xl bg-slate-800 shadow-xl transition duration-300 hover:shadow-cyan-500/30 animate-in"
+                    style="animation-delay: 0.6s;">
+                    <p class="text-sm font-semibold text-accent-color mb-2">HEALTHCARE & FINANCE</p>
+                    <h3 class="text-2xl font-bold text-white mb-4">The 'Trust' Initiative</h3>
+                    <p class="text-gray-400 mb-4">Developed a HIPAA/GDPR-compliant content and email marketing system to
+                        build trust and nurture qualified patient/client leads.</p>
+                    <p class="text-lg font-bold text-white">Result: <span class="text-indigo-400">-40%</span> Cost Per
+                        Acquisition (CPA).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sales / Pricing Section -->
+    <section id="sales" class="py-24 lg:py-32 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-in">
+                <h2 class="text-4xl font-extrabold text-white sm:text-5xl">Transparent Pricing & Plans</h2>
+                <p class="mt-4 text-xl text-gray-400">Find the perfect growth engine for your business needs.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Plan 1: Starter -->
+                <div class="p-8 rounded-2xl bg-slate-800 border border-slate-700 shadow-2xl animate-in transition duration-500 hover:border-indigo-500"
+                    style="animation-delay: 0.2s;">
+                    <h3 class="text-3xl font-bold text-indigo-400 mb-4">Launchpad</h3>
+                    <p class="text-lg text-gray-400 mb-6">Ideal for startups needing foundational marketing presence.
+                    </p>
+                    <p class="text-5xl font-extrabold text-white mb-2">$999<span
+                            class="text-xl font-medium text-gray-500">/mo</span></p>
+                    <p class="text-sm text-accent-color mb-8">Limited-time offer: 50% setup fee discount.</p>
+                    <ul class="space-y-3 text-gray-300 mb-10">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Basic SEO Audit & Optimization</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>1 Google Ads Campaign Setup</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Monthly Performance Report</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full text-center py-3 rounded-full border border-indigo-600 text-indigo-400 font-semibold transition duration-300 hover:bg-indigo-600 hover:text-white">Select
+                        Launchpad</a>
+                </div>
+
+                <!-- Plan 2: Growth (Recommended) -->
+                <div class="p-8 rounded-2xl bg-indigo-900 border-4 border-accent-color shadow-2xl scale-105 animate-in transition duration-500"
+                    style="animation-delay: 0.4s;">
+                    <span
+                        class="absolute top-0 right-0 -mt-4 mr-4 px-3 py-1 bg-accent-color text-slate-900 text-sm font-bold uppercase rounded-full shadow-lg">Most
+                        Popular</span>
+                    <h3 class="text-3xl font-bold text-accent-color mb-4">Accelerator</h3>
+                    <p class="text-lg text-gray-300 mb-6">Designed for established businesses ready to scale rapidly.
+                    </p>
+                    <p class="text-5xl font-extrabold text-white mb-2">$2499<span
+                            class="text-xl font-medium text-gray-300">/mo</span></p>
+                    <p class="text-sm text-cyan-200 mb-8">Includes dedicated Growth Manager and advanced analytics
+                        suite.</p>
+                    <ul class="space-y-3 text-white mb-10">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Comprehensive SEO & Content Strategy</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>PPC Management (Google, Meta, LinkedIn)</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Conversion Rate Optimization (CRO)</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Weekly Strategy Sessions</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center btn-primary">Choose Accelerator</a>
+                </div>
+
+                <!-- Plan 3: Enterprise -->
+                <div class="p-8 rounded-2xl bg-slate-800 border border-slate-700 shadow-2xl animate-in transition duration-500 hover:border-indigo-500"
+                    style="animation-delay: 0.6s;">
+                    <h3 class="text-3xl font-bold text-indigo-400 mb-4">Enterprise</h3>
+                    <p class="text-lg text-gray-400 mb-6">Custom solutions for large organizations with complex needs.
+                    </p>
+                    <p class="text-5xl font-extrabold text-white mb-2">Custom</p>
+                    <p class="text-xl font-medium text-gray-500 mb-8">Quote after consultation</p>
+                    <ul class="space-y-3 text-gray-300 mb-10">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Dedicated Pod (SEO, PPC, Content)</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Marketing Automation & CRM Integration</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>Global Market Penetration Strategy</li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full text-center py-3 rounded-full border border-indigo-600 text-indigo-400 font-semibold transition duration-300 hover:bg-indigo-600 hover:text-white">Request
+                        a Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 lg:py-32 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-in">
+                <h2 class="text-4xl font-extrabold text-white sm:text-5xl">What Our Clients Say</h2>
+                <p class="mt-4 text-xl text-gray-400">Trust is built on results and relationships. Hear it directly from
+                    our partners.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="p-8 rounded-xl bg-slate-800 shadow-xl border-l-4 border-accent-color animate-in"
+                    style="animation-delay: 0.2s;">
+                    <div class="text-2xl font-bold text-accent-color mb-3">"Game Changer!"</div>
+                    <p class="text-lg italic text-gray-300 mb-6">"DKT Marketing didn't just run ads; they understood our
+                        business model. Their PPC optimization reduced our CPA by 40% in three months. It's the best
+                        investment we've made this year."</p>
+                    <div class="flex items-center">
+                        <img class="w-12 h-12 rounded-full object-cover mr-4"
+                            src="https://placehold.co/48x48/6366f1/ffffff?text=JN" alt="Testimonial photo"
+                            onerror="this.onerror=null; this.src='https://placehold.co/48x48/6366f1/ffffff?text=JN';">
+                        <div>
+                            <p class="font-semibold text-white">James Nolan</p>
+                            <p class="text-sm text-gray-400">CEO, TechStart Inc.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="p-8 rounded-xl bg-slate-800 shadow-xl border-l-4 border-indigo-400 animate-in"
+                    style="animation-delay: 0.4s;">
+                    <div class="text-2xl font-bold text-indigo-400 mb-3">"Exceptional Strategic Depth."</div>
+                    <p class="text-lg italic text-gray-300 mb-6">"Our organic traffic was stagnant. After DKT
+                        implemented their content strategy, we saw a massive surge in high-quality leads. They are true
+                        experts in technical SEO and content mapping."</p>
+                    <div class="flex items-center">
+                        <img class="w-12 h-12 rounded-full object-cover mr-4"
+                            src="https://placehold.co/48x48/22d3ee/ffffff?text=SK" alt="Testimonial photo"
+                            onerror="this.onerror=null; this.src='https://placehold.co/48x48/22d3ee/ffffff?text=SK';">
+                        <div>
+                            <p class="font-semibold text-white">Sarah Kelly</p>
+                            <p class="text-sm text-gray-400">Marketing Director, Global Retail Co.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action / Contact Section -->
+    <section id="contact" class="py-24 lg:py-32 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- CTA Content -->
+                <div class="animate-in" style="animation-delay: 0.1s;">
+                    <h2 class="text-4xl font-extrabold text-white sm:text-5xl leading-tight mb-6">Ready to Accelerate
+                        Your Digital Presence?</h2>
+                    <p class="text-xl text-gray-400 mb-8">
+                        Stop leaving revenue on the table. Fill out the form to schedule a free, 30-minute growth
+                        consultation with one of our senior strategists. We'll analyze your current domain performance
+                        and provide three actionable tactics you can implement immediately.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center text-gray-300">
+                            <svg class="w-6 h-6 mr-3 text-accent-color" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <p>hello@dkt_marketing.com</p>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <svg class="w-6 h-6 mr-3 text-accent-color" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243m12.728 0a8 8 0 10-12.728 0m12.728 0H12">
+                                </path>
+                            </svg>
+                            <p>Global Remote Team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="p-8 rounded-2xl bg-slate-800 shadow-2xl animate-in" style="animation-delay: 0.3s;">
+                    <h3 class="text-2xl font-bold text-white mb-6">Schedule Your Free Audit</h3>
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Work Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                        </div>
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-gray-300 mb-1">Company Website
+                                (e.g., dkt_marketing.com)</label>
+                            <input type="url" id="company" name="company" required
+                                class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">What are your top
+                                3 growth goals?</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"></textarea>
+                        </div>
+
+                        <!-- GEMINI API FEATURE: Personalized Headline Generator -->
+                        <div class="p-4 bg-slate-700 rounded-lg border border-indigo-500/50">
+                            <label for="generated-headline" class="block text-sm font-medium text-gray-300 mb-2">✨
+                                Personalized Audit Headline (Optional)</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="generated-headline" name="generated-headline"
+                                    placeholder="Click 'Generate' to craft your unique headline..." readonly
+                                    class="w-3/4 p-3 rounded-lg bg-slate-900 border border-slate-600 text-white text-sm">
+                                <button type="button" id="generate-headline-btn"
+                                    class="w-1/4 py-3 bg-accent-color text-slate-900 font-bold rounded-lg hover:bg-cyan-300 transition duration-150 flex items-center justify-center space-x-2">
+                                    <span id="headline-btn-text">Generate ✨</span>
+                                    <span id="headline-loader" class="hidden spinner"></span>
+                                </button>
+                            </div>
+                            <p id="headline-error" class="hidden text-sm text-red-400 mt-2"></p>
+                            <p class="text-xs text-gray-400 mt-2">Use our AI to instantly create a powerful headline
+                                that summarizes your growth pain points for our team.</p>
+                        </div>
+                        <!-- END GEMINI API FEATURE -->
+
+                        <button type="submit" class="w-full btn-primary mt-4">
+                            Submit and Get Audit
+                        </button>
+                    </form>
+                    <div id="form-message"
+                        class="mt-4 hidden p-3 rounded-lg text-center font-semibold text-white bg-green-600"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursor Tracking Circle with Inner Circle -->
+    <div class="cursor-circle" id="cursorCircle">
+        <div class="cursor-circle-inner" id="cursorCircleInner"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">&copy; 2025 DKT Marketing. All rights reserved. | <a href="#home"
+                    class="hover:text-accent-color">dkt_marketing.com</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Global utility function for fetching with exponential backoff
+        async function fetchWithExponentialBackoff(apiUrl, payload, maxRetries = 5, delay = 1000) {
+            const apiKey = ""; // API key is provided by the canvas environment
+            const urlWithKey = `${apiUrl}?key=${apiKey}`;
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(urlWithKey, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        return await response.json();
+                    } else if (response.status === 429 && i < maxRetries - 1) {
+                        // Too Many Requests, retry with exponential delay
+                        await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+                    } else {
+                        // Handle non-retryable errors
+                        const errorBody = await response.text();
+                        throw new Error(`API call failed with status ${response.status}: ${errorBody}`);
+                    }
+                } catch (error) {
+                    if (i === maxRetries - 1) {
+                        throw error;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+                }
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const sections = document.querySelectorAll('section');
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+            const stats = document.querySelectorAll('.stat-bar');
+
+            // LLM elements
+            const generateHeadlineBtn = document.getElementById('generate-headline-btn');
+            const generatedHeadlineInput = document.getElementById('generated-headline');
+            const companyInput = document.getElementById('company');
+            const messageInput = document.getElementById('message');
+            const headlineLoader = document.getElementById('headline-loader');
+            const headlineBtnText = document.getElementById('headline-btn-text');
+            const headlineError = document.getElementById('headline-error');
+
+            // Parallax elements
+            const heroSection = document.getElementById('home');
+            const glow1 = document.getElementById('glow-1');
+            const glow2 = document.getElementById('glow-2');
+            const glow3 = document.getElementById('glow-3');
+            const heroContent = document.getElementById('hero-content'); // The main grid container
+
+            // --- 1. Header Scroll Effect ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // --- 2. Mobile Menu Toggle ---
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Close mobile menu on link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- 3. Animation On Scroll (AOS) ---
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Special handling for Hero Section elements to trigger their animations
+                        if (entry.target.id === 'home') {
+                            // Trigger stat bar width animation on hero section view
+                            stats.forEach(bar => {
+                                const targetWidth = bar.getAttribute('data-width');
+                                bar.style.width = targetWidth;
+                            });
+                            // Set bar chart heights (simulating animation)
+                            document.getElementById('bar-industry').style.height = '32%';
+                            document.getElementById('bar-dkt').style.height = '55%';
+                            document.getElementById('bar-top').style.height = '81%';
+
+                            // Start typing animation when the hero section becomes visible
+                            if (!typingElement.textContent) {
+                                type();
+                            }
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the section is visible
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 4. Form Submission Handler ---
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get data, including the generated headline
+                const formData = new FormData(contactForm);
+                const submissionData = Object.fromEntries(formData.entries());
+
+                let finalMessage = 'Thank you for your request! We will contact you within 24 hours.';
+                if (submissionData['generated-headline']) {
+                    finalMessage += ` Your powerful audit headline, "${submissionData['generated-headline']}", has been noted.`;
+                }
+
+                // Simulate success feedback
+                formMessage.textContent = finalMessage;
+                formMessage.classList.remove('hidden', 'bg-red-600');
+                formMessage.classList.add('bg-green-600');
+                contactForm.reset();
+                generatedHeadlineInput.value = ''; // Clear the generated headline after submission
+
+                // Hide message after 8 seconds
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 8000);
+            });
+
+            // --- 5. Initial Stat Bar Reset (for animation effect) ---
+            stats.forEach(bar => {
+                bar.style.width = '0%';
+            });
+            document.getElementById('bar-industry').style.height = '0%';
+            document.getElementById('bar-dkt').style.height = '0%';
+            document.getElementById('bar-top').style.height = '0%';
+
+
+            // --- 6. LLM Integration Logic (Gemini API) ---
+            generateHeadlineBtn.addEventListener('click', async () => {
+                const website = companyInput.value.trim();
+                const goals = messageInput.value.trim();
+
+                if (!website || !goals) {
+                    headlineError.textContent = 'Please enter both your company website and top growth goals first.';
+                    headlineError.classList.remove('hidden');
+                    generatedHeadlineInput.value = '';
+                    return;
+                }
+
+                // Show loading state
+                headlineBtnText.classList.add('hidden');
+                headlineLoader.classList.remove('hidden');
+                headlineError.classList.add('hidden');
+                generatedHeadlineInput.value = 'Generating...';
+
+                const prompt = `Company Website: ${website}\nTop Growth Goals: ${goals}\n\nGenerate a single, short (max 10 words), highly compelling, and urgent headline for a digital marketing audit request based on this information. The tone must be results-oriented and professional. Do not include quotes or special characters.`;
+
+                const systemPrompt = "Act as a senior, data-driven growth copywriter for a top-tier digital marketing agency (DKT Marketing). Your goal is to write highly focused, impactful headlines for potential client audit requests.";
+
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent`;
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
+                };
+
+                try {
+                    const result = await fetchWithExponentialBackoff(apiUrl, payload);
+
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text || 'Failed to generate headline.';
+
+                    // Clean up output (remove extra whitespace/quotes if model was imperfect)
+                    const cleanText = text.trim().replace(/^['"]+|['"]+$/g, '');
+
+                    generatedHeadlineInput.value = cleanText;
+                    headlineError.classList.add('hidden');
+
+                } catch (error) {
+                    console.error("Gemini API Error:", error);
+                    generatedHeadlineInput.value = '';
+                    headlineError.textContent = 'API failed to generate headline. Please try again.';
+                    headlineError.classList.remove('hidden');
+                } finally {
+                    // Hide loading state
+                    headlineLoader.classList.add('hidden');
+                    headlineBtnText.classList.remove('hidden');
+                }
+            });
+
+            // --- 7. Hero Section Typing Animation Logic ---
+            const words = ["ROI", "Leads", "Conversions", "Revenue"];
+            let i = 0; // Word index
+            let j = 0; // Character index
+            let currentWord = "";
+            let isDeleting = false;
+            const typingElement = document.getElementById('dynamic-typing-text');
+
+            function type() {
+                if (!typingElement) return;
+
+                currentWord = words[i];
+
+                if (isDeleting) {
+                    // Deleting: remove character
+                    typingElement.textContent = currentWord.substring(0, j - 1);
+                    j--;
+                } else {
+                    // Typing: add character
+                    typingElement.textContent = currentWord.substring(0, j + 1);
+                    j++;
+                }
+
+                // Determine speed
+                let speed = isDeleting ? 70 : 150;
+                if (!isDeleting && j === currentWord.length) {
+                    // Pause at the end of typing
+                    speed = 1800;
+                    isDeleting = true;
+                } else if (isDeleting && j === 0) {
+                    // Finish deleting, move to next word
+                    isDeleting = false;
+                    i = (i + 1) % words.length;
+                    speed = 500; // Pause before starting new word
+                }
+
+                setTimeout(type, speed);
+            }
+
+            type();
+
+            // --- 8. Cursor Parallax Effect Logic ---
+            function handleParallax(e) {
+                // Determine center of the hero section
+                const rect = heroSection.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                // Calculate mouse offset from center
+                const offsetX = e.clientX - centerX;
+                const offsetY = e.clientY - centerY;
+
+                // Parallax Factors (adjust these for effect intensity)
+                const factor1 = 0.025; // Strongest effect for glow elements
+                const factor2 = 0.01; // Medium effect for other glow elements
+                const factor3 = 0.005; // Subtle effect for main content
+
+                // Move background glow elements opposite to the cursor movement (deeper elements appear to move more)
+                if (glow1) glow1.style.transform = `translate(${offsetX * -factor1}px, ${offsetY * -factor1}px)`;
+                if (glow2) glow2.style.transform = `translate(${offsetX * factor2}px, ${offsetY * factor2}px)`;
+                if (glow3) glow3.style.transform = `translate(${offsetX * -factor1}px, ${offsetY * -factor2}px)`;
+
+                // Move main content slightly with the cursor movement (appears closer)
+                if (heroContent) heroContent.style.transform = `translate(${offsetX * factor3}px, ${offsetY * factor3}px)`;
+            }
+
+            // Apply event listener to the entire hero section
+            heroSection.addEventListener('mousemove', handleParallax);
+
+            // Reset Parallax effect when mouse leaves the area
+            heroSection.addEventListener('mouseleave', () => {
+                if (glow1) glow1.style.transform = `translate(0, 0)`;
+                if (glow2) glow2.style.transform = `translate(0, 0)`;
+                if (glow3) glow3.style.transform = `translate(0, 0)`;
+                if (heroContent) heroContent.style.transform = `translate(0, 0)`;
+            });
+
+            // --- 9. Cursor Tracking Circle with Hover Effects ---
+            const cursorCircle = document.getElementById('cursorCircle');
+            let mouseX = 0;
+            let mouseY = 0;
+            let circleX = 0;
+            let circleY = 0;
+            let isMouseDown = false;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorCircle.classList.add('active');
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursorCircle.classList.remove('active');
+                cursorCircle.classList.remove('hovering', 'hovering-accent');
+            });
+
+            document.addEventListener('mousedown', () => {
+                isMouseDown = true;
+                cursorCircle.style.transform = `translate(-50%, -50%) scale(2)`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                isMouseDown = false;
+            });
+
+            // Add hover detection for interactive elements
+            const interactiveElements = document.querySelectorAll('button, a, input, textarea, [role="button"], .cursor-hover, .card-hover');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursorCircle.classList.remove('hovering', 'hovering-accent');
+                    // Determine which hover style based on element type or class
+                    if (element.classList.contains('btn-primary') || element.tagName === 'BUTTON' || element.classList.contains('hover-accent')) {
+                        cursorCircle.classList.add('hovering-accent');
+                    } else {
+                        cursorCircle.classList.add('hovering');
+                    }
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    cursorCircle.classList.remove('hovering', 'hovering-accent');
+                });
+            });
+
+            // Also detect hovers on dynamically added interactive elements (cards, inputs)
+            const cards = document.querySelectorAll('[class*="rounded-"][class*="shadow"], .p-6, .p-8');
+            cards.forEach(card => {
+                // Only add hover if it contains interactive content
+                if (card.querySelector('button, a, input, [role="button"]')) {
+                    card.addEventListener('mouseenter', () => {
+                        cursorCircle.classList.remove('hovering', 'hovering-accent');
+                        cursorCircle.classList.add('hovering');
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        cursorCircle.classList.remove('hovering', 'hovering-accent');
+                    });
+                }
+            });
+
+            // Smooth animation loop for circle following
+            function animateCircle() {
+                circleX += (mouseX - circleX) * 0.2; // Easing factor for smooth follow
+                circleY += (mouseY - circleY) * 0.2;
+
+                cursorCircle.style.left = circleX + 'px';
+                cursorCircle.style.top = circleY + 'px';
+
+                if (!isMouseDown) {
+                    cursorCircle.style.transform = `translate(-50%, -50%) scale(1)`;
+                }
+
+                requestAnimationFrame(animateCircle);
+            }
+
+            animateCircle();
+
+        });
+    </script>
+
+</body>
+
+</html>

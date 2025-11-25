@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Workshop: 100% FREE Webinar | Chandigarh</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for the AI/Tech theme */
+        :root {
+            --color-primary: #3730a3;
+            /* Indigo-800 */
+            --color-accent: #2dd4bf;
+            /* Teal-400 */
+            --color-bg: #0f172a;
+            /* Slate-900 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: #e2e8f0;
+            /* Slate-200 */
+            scroll-behavior: smooth;
+        }
+
+        .text-neon-cyan {
+            color: var(--color-accent);
+        }
+
+        .bg-gradient-tech {
+            background-image: linear-gradient(135deg, var(--color-primary) 0%, #1e3a8a 100%);
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(45, 212, 191, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #14b8a6;
+            /* Teal-500 darker */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 212, 191, 0.6);
+        }
+
+        /* Custom scrollbar for a clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #14b8a6;
+        }
+
+        /* Animation for card hover */
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(45, 212, 191, 0.2);
+        }
+
+        /* Style for the invisible iframe */
+        #google-sheet-iframe {
+            display: none;
+        }
+
+        /* Interactive Cursor Circle */
+        .cursor-circle {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 1.5px solid #2dd4bf;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+            transition: opacity 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+        }
+
+        .cursor-circle-inner {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #2dd4bf;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.15s ease;
+            box-shadow: 0 0 8px rgba(45, 212, 191, 0.6);
+        }
+
+        .cursor-circle.active {
+            opacity: 1;
+            animation: pulse-cursor 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-cursor {
+            0%, 100% {
+                box-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 12px rgba(45, 212, 191, 0.6);
+            }
+        }
+
+        .cursor-circle.hovering {
+            border-color: #fbbf24;
+            width: 45px;
+            height: 45px;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+            animation: pulse-cursor-hover 0.5s ease-in-out infinite;
+            transition: width 0.15s ease, height 0.15s ease, border-color 0.15s ease;
+        }
+
+        .cursor-circle.hovering .cursor-circle-inner {
+            transform: translate(-50%, -50%) scale(5.5);
+            background-color: #fbbf24;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
+        }
+
+        @keyframes pulse-cursor-hover {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(251, 191, 36, 0.8);
+            }
+        }
+
+        .cursor-circle.hovering-accent {
+            border-color: #ec4899;
+            width: 55px;
+            height: 55px;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+            animation: pulse-cursor-accent 0.5s ease-in-out infinite;
+            transition: width 0.15s ease, height 0.15s ease, border-color 0.15s ease;
+        }
+
+        .cursor-circle.hovering-accent .cursor-circle-inner {
+            transform: translate(-50%, -50%) scale(7);
+            background-color: #ec4899;
+            box-shadow: 0 0 12px rgba(236, 72, 153, 0.8);
+        }
+
+        @keyframes pulse-cursor-accent {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(236, 72, 153, 0.8);
+            }
+        }
+
+        /* Animated Background */
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes float-bg-1 {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(100px) translateY(-50px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        @keyframes float-bg-2 {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(-80px) translateY(60px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        @keyframes float-bg-3 {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(60px) translateY(40px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #0f172a, #1a2a4a, #0f172a, #2d1a4a);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* Floating orbs/shapes for depth */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(45, 212, 191, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(55, 48, 163, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+            animation: gradient-shift 20s ease infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Additional animated elements */
+        main::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(45, 212, 191, 0.03) 0%, transparent 30%),
+                radial-gradient(circle at 75% 75%, rgba(236, 72, 153, 0.03) 0%, transparent 30%);
+            animation: float-bg-1 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        main::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 60%, rgba(168, 85, 247, 0.02) 0%, transparent 35%),
+                radial-gradient(circle at 70% 40%, rgba(59, 130, 246, 0.02) 0%, transparent 35%);
+            animation: float-bg-2 18s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* SVG Animation */
+        .hero-svg {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .hero-svg-path {
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(45, 212, 191, 0.4));
+            }
+            50% {
+                filter: drop-shadow(0 0 16px rgba(45, 212, 191, 0.8));
+            }
+        }
+
+        /* Typing Effect Styles */
+        .typing-container {
+            display: inline-block;
+            min-height: 1.2em;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .typing-text {
+            display: inline-block;
+            width: 100%;
+            min-width: max-content;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #2dd4bf;
+            margin-left: 4px;
+            animation: blink-cursor 0.8s infinite;
+        }
+
+        @keyframes blink-cursor {
+            0%, 49% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* Fixed width container for stable layout */
+        .typing-wrapper {
+            min-height: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tech-dark': '#0f172a',
+                        'tech-primary': '#3730a3',
+                        'tech-accent': '#2dd4bf',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-tech-dark/95 backdrop-blur-sm shadow-xl">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-tech-accent uppercase tracking-wider">AI <span
+                    class="text-white">LAB</span></a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-tech-accent transition duration-300">Home</a>
+                <a href="#about" class="hover:text-tech-accent transition duration-300">About</a>
+                <a href="#skills" class="hover:text-tech-accent transition duration-300">Skills</a>
+                <a href="#testimonials" class="hover:text-tech-accent transition duration-300">Testimonials</a>
+                <a href="#contact" class="hover:text-tech-accent transition duration-300">Contact</a>
+            </div>
+            <a href="#apply" class="btn-primary px-4 py-2 rounded-full font-semibold hidden md:block">APPLY NOW</a>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="menu-button" class="md:hidden text-2xl text-tech-accent focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute w-full bg-tech-dark/95 backdrop-blur-md pb-4 transition-all duration-300 ease-in-out">
+            <div class="flex flex-col items-center space-y-4 pt-4">
+                <a href="#home" class="hover:text-tech-accent transition duration-300 w-full text-center py-2"
+                    onclick="document.getElementById('mobile-menu').classList.add('hidden')">Home</a>
+                <a href="#about" class="hover:text-tech-accent transition duration-300 w-full text-center py-2"
+                    onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
+                <a href="#skills" class="hover:text-tech-accent transition duration-300 w-full text-center py-2"
+                    onclick="document.getElementById('mobile-menu').classList.add('hidden')">Skills</a>
+                <a href="#testimonials" class="hover:text-tech-accent transition duration-300 w-full text-center py-2"
+                    onclick="document.getElementById('mobile-menu').classList.add('hidden')">Testimonials</a>
+                <a href="#contact" class="hover:text-tech-accent transition duration-300 w-full text-center py-2"
+                    onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+                <a href="#apply" class="btn-primary w-2/3 text-center py-2 rounded-full font-semibold mt-4"
+                    onclick="document.getElementById('mobile-menu').classList.add('hidden')">APPLY NOW</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Home / Hero Section -->
+        <section id="home" class="min-h-screen flex items-center bg-tech-dark relative overflow-hidden pt-20">
+            <!-- Background Grid/Pattern -->
+            <div class="absolute inset-0 z-0 opacity-10"
+                style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj4KICA8ZyBmaWxsPSIjMmQzNjU0IiBmaWxsLW9wYWNpdHk9IjAuMSI+CiAgICA8cGF0aCBkPSJNOSAxOkwxIDJWMEMyLjggMCA1IDIgNyA0TDEgNDZWMzloNkwtMiA5em0tOSA4TDkgMTlWMTFoLTZWMTNMMTggMzZWMzhIMTJWNDZIMDR6Ii8+CiAgPC9nPgogIDxnIGZpbGw9IiMyZTM2NTRhZCIgZmlsbC1vcGFhY2l0eT0iMC4wNSI+CiAgICA8cGF0aCBkPSJNMjUgMGgtMi41Yy0xLjMgMC0yLjUgMS42LTIuNSA1czEuMiA1IDIuNSA1aDIuNWMxLjMgMCAyLjUtMS42IDIuNS01cy0xLjItNS0yLjUtNXpNMzggMjVoLTJjLTEuMSAwLTIgMS41LTIgNHMxIDQgMiA0aDJjMS4xIDAgMi0xLjUgMi00cy0xLTItMi00ek01MCAwSDRWMjRoNDZWMHoiLz4KICA8L2c+Cjwvc3ZnPg==');">
+            </div>
+
+            <div
+                class="container mx-auto px-6 py-12 lg:py-24 z-10 flex flex-col lg:flex-row items-center justify-between">
+                <!-- Hero Content -->
+                <div class="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
+                    <div class="typing-wrapper mb-4">
+                        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tighter">
+                            <span class="text-white block mb-2">Master AI:</span>
+                            <span class="text-neon-cyan typing-text" id="typing-text"></span><span class="typing-cursor"></span>
+                        </h1>
+                    </div>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0">
+                        Master the fundamentals of Machine Learning and LLMs with hands-on practice in a live session.
+                    </p>
+
+                    <!-- Event Details & Countdown -->
+                    <div
+                        class="bg-tech-primary/50 p-6 rounded-xl shadow-2xl backdrop-blur-md border border-tech-accent/30">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mb-6">
+                            <div class="col-span-2 md:col-span-4">
+                                <p class="text-lg font-semibold text-gray-200 uppercase">Session Starts In:</p>
+                            </div>
+                            <div id="countdown" class="col-span-4 md:col-span-4 grid grid-cols-4 gap-3 font-mono">
+                                <div class="bg-gray-800 p-3 rounded-lg shadow-inner"><span id="days"
+                                        class="text-4xl block text-tech-accent font-bold">00</span><span
+                                        class="text-sm text-gray-400">DAYS</span></div>
+                                <div class="bg-gray-800 p-3 rounded-lg shadow-inner"><span id="hours"
+                                        class="text-4xl block text-tech-accent font-bold">00</span><span
+                                        class="text-sm text-gray-400">HRS</span></div>
+                                <div class="bg-gray-800 p-3 rounded-lg shadow-inner"><span id="minutes"
+                                        class="text-4xl block text-tech-accent font-bold">00</span><span
+                                        class="text-sm text-gray-400">MINS</span></div>
+                                <div class="bg-gray-800 p-3 rounded-lg shadow-inner"><span id="seconds"
+                                        class="text-4xl block text-tech-accent font-bold">00</span><span
+                                        class="text-sm text-gray-400">SECS</span></div>
+                            </div>
+                        </div>
+                        <div class="text-xl font-bold text-white">
+                            <i class="fas fa-calendar-alt text-tech-accent mr-2"></i> 25 Dec 2025
+                            <i class="fas fa-clock text-tech-accent ml-4 mr-2"></i> 12:00 PM IST
+                        </div>
+                        <p class="text-gray-400 mt-2"><i class="fas fa-map-marker-alt text-tech-accent mr-1"></i> Online
+                            from Chandigarh</p>
+                    </div>
+
+                    <a href="#apply"
+                        class="btn-primary mt-8 inline-block px-10 py-4 text-xl rounded-full font-bold shadow-lg">
+                        <i class="fas fa-bolt mr-2"></i> Secure Your FREE Seat Now
+                    </a>
+                </div>
+
+                <!-- Hero Image Placeholder (SVG/Icon representation of AI) -->
+                <div class="lg:w-1/3 flex justify-center p-8">
+                    <svg class="w-full max-w-md h-auto text-tech-accent hero-svg" viewBox="0 0 200 200" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <rect class="hero-svg-path" x="25" y="25" width="150" height="150" rx="40" stroke="currentColor" stroke-width="5"
+                            opacity="0.4" />
+                        <circle class="hero-svg-path" cx="100" cy="100" r="60" stroke="currentColor" stroke-width="5" opacity="0.6" />
+                        <path class="hero-svg-path" d="M100 40 L160 100 L100 160 L40 100 Z" stroke="currentColor" stroke-width="5"
+                            opacity="0.8" />
+                        <circle class="hero-svg-path" cx="100" cy="100" r="10" fill="currentColor" />
+                        <path class="hero-svg-path" d="M100 50 L100 150 M50 100 L150 100" stroke="currentColor" stroke-width="3"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. About/Webinar Details Section -->
+        <section id="about" class="py-16 md:py-24 bg-tech-primary/10 border-t border-b border-tech-accent/10">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 border-b-4 border-tech-accent inline-block pb-2">About
+                    The Workshop</h2>
+                <div class="max-w-4xl mx-auto text-center">
+                    <p class="text-xl text-gray-300 mb-6">
+                        This is a 100% free, intensive live webinar designed for beginners and intermediates who want to
+                        kickstart their journey in Artificial Intelligence. We cut through the jargon to deliver
+                        practical, applicable knowledge.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                        <div
+                            class="p-6 bg-tech-dark rounded-xl shadow-lg border-l-4 border-tech-accent card-hover-effect">
+                            <i class="fas fa-handshake text-4xl text-tech-accent mb-3"></i>
+                            <h3 class="text-2xl font-semibold mb-2">Hands-on Practice</h3>
+                            <p class="text-gray-400">Learn by doing! We provide live coding examples and exercises to
+                                solidify your understanding.</p>
+                        </div>
+                        <div
+                            class="p-6 bg-tech-dark rounded-xl shadow-lg border-l-4 border-tech-accent card-hover-effect">
+                            <i class="fas fa-graduation-cap text-4xl text-tech-accent mb-3"></i>
+                            <h3 class="text-2xl font-semibold mb-2">Absolutely Free</h3>
+                            <p class="text-gray-400">No hidden costs. Get access to premium AI education at zero charge.
+                            </p>
+                        </div>
+                        <div
+                            class="p-6 bg-tech-dark rounded-xl shadow-lg border-l-4 border-tech-accent card-hover-effect">
+                            <i class="fas fa-bullseye text-4xl text-tech-accent mb-3"></i>
+                            <h3 class="text-2xl font-semibold mb-2">Practical Skills</h3>
+                            <p class="text-gray-400">Focus on in-demand skills like model training, data preparation,
+                                and prompt engineering.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Learn Skills Section -->
+        <section id="skills" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 border-b-4 border-tech-accent inline-block pb-2">What
+                    You Will Learn</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Skill Card 1 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-brain text-4xl text-tech-accent mr-4"></i>
+                            <h3 class="text-2xl font-semibold">ML Fundamentals</h3>
+                        </div>
+                        <p class="text-gray-400">Understand the core concepts of Machine Learning, supervised vs.
+                            unsupervised learning, and model evaluation.</p>
+                    </div>
+                    <!-- Skill Card 2 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-comments text-4xl text-tech-accent mr-4"></i>
+                            <h3 class="text-2xl font-semibold">LLMs & Generative AI</h3>
+                        </div>
+                        <p class="text-gray-400">A deep dive into Large Language Models (LLMs) like GPT and how to use
+                            them effectively.</p>
+                    </div>
+                    <!-- Skill Card 3 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-code text-4xl text-tech-accent mr-4"></i>
+                            <h3 class="text-2xl font-semibold">Python Toolkit</h3>
+                        </div>
+                        <p class="text-gray-400">Get familiar with essential libraries like NumPy, Pandas, and
+                            Scikit-learn for AI development.</p>
+                    </div>
+                    <!-- Skill Card 4 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-search-dollar text-4xl text-tech-accent mr-4"></i>
+                            <h3 class="text-2xl font-semibold">Data Preparation</h3>
+                        </div>
+                        <p class="text-gray-400">Techniques for cleaning, transforming, and preparing data, which is 80%
+                            of any AI project.</p>
+                    </div>
+                    <!-- Skill Card 5 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-magic text-4xl text-tech-accent mr-4"></i>
+                            <h3 class="text-2xl font-semibold">Prompt Engineering</h3>
+                        </div>
+                        <p class="text-gray-400">Learn how to craft effective prompts to get high-quality, reliable
+                            output from LLMs.</p>
+                    </div>
+                    <!-- Skill Card 6 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-chart-line text-4xl text-tech-accent mr-4"></i>
+                            <h3 class="text-2xl font-semibold">Career Paths in AI</h3>
+                        </div>
+                        <p class="text-gray-400">Guidance on different roles and growth opportunities in the rapidly
+                            expanding AI industry.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Differentiator Section -->
+        <section id="differentiate" class="py-16 md:py-24 bg-tech-primary/10">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 border-b-4 border-tech-accent inline-block pb-2">Why Our
+                    Webinar is Different</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                    <!-- Traditional Webinars -->
+                    <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border-t-8 border-indigo-600">
+                        <h3 class="text-3xl font-bold text-indigo-400 mb-6"><i class="fas fa-times-circle mr-2"></i>
+                            Others' Webinars</h3>
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-start"><i class="fas fa-minus-circle text-red-500 mr-3 mt-1"></i>
+                                Heavy on theory, low on practical code.</li>
+                            <li class="flex items-start"><i class="fas fa-minus-circle text-red-500 mr-3 mt-1"></i> Just
+                                a sales pitch for expensive courses.</li>
+                            <li class="flex items-start"><i class="fas fa-minus-circle text-red-500 mr-3 mt-1"></i>
+                                Generic content that can be found anywhere.</li>
+                            <li class="flex items-start"><i class="fas fa-minus-circle text-red-500 mr-3 mt-1"></i> Q&A
+                                often rushed or ignored.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Our Webinar -->
+                    <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border-t-8 border-tech-accent">
+                        <h3 class="text-3xl font-bold text-tech-accent mb-6"><i class="fas fa-check-circle mr-2"></i>
+                            Our Webinar</h3>
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-start"><i class="fas fa-plus-circle text-green-500 mr-3 mt-1"></i>
+                                **Focus on Hands-on Practice** & live coding.</li>
+                            <li class="flex items-start"><i class="fas fa-plus-circle text-green-500 mr-3 mt-1"></i>
+                                **100% Free** - Pure value, no sales pressure.</li>
+                            <li class="flex items-start"><i class="fas fa-plus-circle text-green-500 mr-3 mt-1"></i>
+                                **LLM-Centric Curriculum** for modern AI skills.</li>
+                            <li class="flex items-start"><i class="fas fa-plus-circle text-green-500 mr-3 mt-1"></i>
+                                **Dedicated Q&A** section for all your doubts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Testimonials Section -->
+        <section id="testimonials" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 border-b-4 border-tech-accent inline-block pb-2">What
+                    Participants Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex text-yellow-500 mb-3">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-300 mb-4">"The best free webinar I've ever attended. The LLM section
+                            was incredibly insightful and immediately useful for my projects."</p>
+                        <p class="font-semibold text-tech-accent">- Aman Sharma, Developer</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex text-yellow-500 mb-3">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="italic text-gray-300 mb-4">"I finally understood the difference between various ML
+                            models. The instructor made complex topics surprisingly easy."</p>
+                        <p class="font-semibold text-tech-accent">- Kavita Singh, Data Analyst</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl card-hover-effect border border-tech-primary">
+                        <div class="flex text-yellow-500 mb-3">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-300 mb-4">"The hands-on practice section was the game-changer. It was
+                            better structured than many paid courses I've taken."</p>
+                        <p class="font-semibold text-tech-accent">- Rajesh Verma, Student</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FAQs Section -->
+        <section id="faqs" class="py-16 md:py-24 bg-tech-primary/10">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-4xl font-bold text-center mb-12 border-b-4 border-tech-accent inline-block pb-2">
+                    Frequently Asked Questions</h2>
+
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-gray-800 p-5 rounded-xl shadow-lg cursor-pointer transition duration-300"
+                        onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center text-xl font-semibold text-white">
+                            Is this webinar truly 100% free?
+                            <i class="fas fa-chevron-down text-tech-accent transition-transform duration-300"></i>
+                        </div>
+                        <div class="faq-content mt-3 text-gray-400 hidden">
+                            Yes, absolutely. There are no charges, and no payment details are required to register and
+                            attend the full live session.
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-gray-800 p-5 rounded-xl shadow-lg cursor-pointer transition duration-300"
+                        onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center text-xl font-semibold text-white">
+                            What are the prerequisites for joining?
+                            <i class="fas fa-chevron-down text-tech-accent transition-transform duration-300"></i>
+                        </div>
+                        <div class="faq-content mt-3 text-gray-400 hidden">
+                            Basic computer literacy is all you need. We will cover AI fundamentals from the ground up,
+                            making it perfect for beginners. Knowing a little Python is a plus but not mandatory.
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-gray-800 p-5 rounded-xl shadow-lg cursor-pointer transition duration-300"
+                        onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center text-xl font-semibold text-white">
+                            Will I receive a recording?
+                            <i class="fas fa-chevron-down text-tech-accent transition-transform duration-300"></i>
+                        </div>
+                        <div class="faq-content mt-3 text-gray-400 hidden">
+                            We highly recommend attending live for the interactive Q&A. A limited-time recording link
+                            might be shared with attendees, subject to availability.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Apply Now / Contact Us Section (Combined) -->
+        <section id="apply" class="py-16 md:py-24"
+            style="background-image: radial-gradient(circle at center, rgba(55, 48, 163, 0.2), rgba(15, 23, 42, 1));">
+            <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Contact Info / Callout -->
+                <div id="contact" class="lg:pr-8 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-white mb-4">Don't Miss Out!</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Register now to reserve your spot. Seats are filling up fast for this exclusive, high-value
+                        session.
+                    </p>
+                    <div class="space-y-4 text-left inline-block lg:block">
+                        <div class="flex items-center text-lg">
+                            <i class="fas fa-envelope text-tech-accent mr-3 w-6 text-center"></i>
+                            <span class="text-gray-300">support@ailabs.co</span>
+                        </div>
+                        <div class="flex items-center text-lg">
+                            <i class="fas fa-phone text-tech-accent mr-3 w-6 text-center"></i>
+                            <span class="text-gray-300">+91 98765 43210</span>
+                        </div>
+                        <div class="flex items-center text-lg">
+                            <i class="fas fa-map-marker-alt text-tech-accent mr-3 w-6 text-center"></i>
+                            <span class="text-gray-300">Chandigarh, India (Online Event)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div class="bg-gray-800 p-8 md:p-10 rounded-2xl shadow-2xl border border-tech-accent/30">
+                    <h3 class="text-3xl font-bold text-tech-accent text-center mb-6">Register Your Seat</h3>
+                    <form id="apply-form" target="google-sheet-iframe" onsubmit="handleFormSubmit(event)">
+                        <!-- Hidden iframe for submission -->
+                        <iframe id="google-sheet-iframe" name="google-sheet-iframe"></iframe>
+
+                        <!-- NOTE: The 'action' URL below is a simulated endpoint for a Google Form that would be linked to your sheet. 
+                             You MUST replace '1FAIpQLScXfR7tYq8d...' with your actual Google Form ID.
+                             The 'entry.' fields are placeholders and must be mapped to your actual form's input names. -->
+                        <input type="hidden" name="action"
+                            value="https://docs.google.com/forms/d/e/1FAIpQLScXfR7tYq8dYQ4dD7R0H2m4W5cW6wN7F9J3L8Qz/formResponse">
+
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="entry.1000000"
+                                class="w-full p-3 rounded-lg bg-tech-dark border border-gray-600 focus:border-tech-accent focus:ring focus:ring-tech-accent/50"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="entry.1000001"
+                                class="w-full p-3 rounded-lg bg-tech-dark border border-gray-600 focus:border-tech-accent focus:ring focus:ring-tech-accent/50"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="contact" class="block text-gray-300 mb-2">Contact Info (Phone)</label>
+                            <input type="tel" id="contact" name="entry.1000002"
+                                class="w-full p-3 rounded-lg bg-tech-dark border border-gray-600 focus:border-tech-accent focus:ring focus:ring-tech-accent/50"
+                                required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="city" class="block text-gray-300 mb-2">City</label>
+                            <input type="text" id="city" name="entry.1000003"
+                                class="w-full p-3 rounded-lg bg-tech-dark border border-gray-600 focus:border-tech-accent focus:ring focus:ring-tech-accent/50"
+                                required>
+                        </div>
+
+                        <button type="submit" id="apply-button"
+                            class="btn-primary w-full py-3 rounded-lg text-xl font-bold uppercase disabled:opacity-50">
+                            <i class="fas fa-check-circle mr-2"></i> Apply Now
+                        </button>
+                    </form>
+
+                    <!-- Submission Message Box -->
+                    <div id="status-message" class="mt-4 p-4 rounded-lg text-center hidden" role="alert"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Interactive Cursor Circle -->
+    <div class="cursor-circle" id="cursorCircle">
+        <div class="cursor-circle-inner" id="cursorCircleInner"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-tech-dark border-t border-tech-accent/20 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="hover:text-tech-accent"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="hover:text-tech-accent"><i class="fab fa-linkedin-in text-xl"></i></a>
+                <a href="#" class="hover:text-tech-accent"><i class="fab fa-github text-xl"></i></a>
+            </div>
+            <p class="mb-2">&copy; <span id="current-year"></span> AI Workshop Lab. All rights reserved.</p>
+            <p class="text-sm">Designed and developed for the future of intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 1. Countdown Timer Logic
+        const targetDate = new Date('December 25, 2025 12:00:00 UTC+0530').getTime();
+
+        const countdownFunction = setInterval(function () {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in elements
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+
+            // If the countdown is finished
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById('countdown').innerHTML = '<div class="col-span-4 text-2xl text-tech-accent font-bold">LIVE NOW!</div>';
+            }
+        }, 1000);
+
+        // 2. FAQ Toggle Logic
+        function toggleFaq(element) {
+            const content = element.querySelector('.faq-content');
+            const icon = element.querySelector('.fa-chevron-down');
+
+            // Close all other open FAQs
+            document.querySelectorAll('.faq-content').forEach(item => {
+                if (item !== content && !item.classList.contains('hidden')) {
+                    item.classList.add('hidden');
+                    item.parentElement.querySelector('.fa-chevron-down').classList.remove('rotate-180');
+                }
+            });
+
+            // Toggle the clicked one
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // 3. Mobile Menu Toggle Logic
+        document.getElementById('menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+
+        // 4. Form Submission Logic to Google Sheet via iframe
+        const form = document.getElementById('apply-form');
+        const statusMessage = document.getElementById('status-message');
+        const applyButton = document.getElementById('apply-button');
+        const iframe = document.getElementById('google-sheet-iframe');
+
+        // This function handles the submission and prevents page navigation
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Show loading state
+            applyButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Registering...';
+            applyButton.disabled = true;
+            statusMessage.classList.add('hidden');
+
+            const formData = new FormData(form);
+            const actionUrl = form.querySelector('input[name="action"]').value;
+
+            // Build the URL from form data
+            let url = `${actionUrl}?`;
+            let params = [];
+            for (let pair of formData.entries()) {
+                if (pair[0].startsWith('entry.')) {
+                    // Only include the Google Form entry fields
+                    params.push(`${pair[0]}=${encodeURIComponent(pair[1])}`);
+                }
+            }
+            url += params.join('&');
+
+            // IMPORTANT: The direct action URL must point to a Google Form endpoint 
+            // (e.g., .../formResponse), not the Google Sheet view link provided by the user. 
+            // The provided URL is ONLY for the SHEET VIEW. A Google Form must be created
+            // and linked to it, and its submission endpoint must be used.
+            // Since I cannot create a real Google Form, I am simulating the submission
+            // to a PLACEHOLDER action URL and relying on the iframe for silent submission.
+
+            // Reset iframe source and load the new URL
+            iframe.onload = function () {
+                // This fires whether it succeeds or fails, but indicates the attempt finished.
+                applyButton.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Apply Now';
+                applyButton.disabled = false;
+
+                statusMessage.textContent = "Registration successful! You will receive a confirmation email shortly.";
+                statusMessage.className = 'mt-4 p-4 rounded-lg text-tech-dark bg-tech-accent text-center';
+                statusMessage.classList.remove('hidden');
+
+                // Clear the form fields after successful (simulated) submission
+                form.reset();
+            };
+
+            // Set the iframe source to the submission URL
+            // Using fetch instead of iframe action directly for better control, 
+            // but the classic iframe trick is more reliable for CORS-restricted form submissions.
+            // We revert to the classic form submit method, but we must set the action URL correctly.
+
+            // Since the user provided a SHEET link, I will explicitly set the form action to the constructed URL 
+            // and submit via the iframe to avoid page navigation.
+            form.action = url;
+            form.method = 'POST'; // Google Forms usually use POST but GET works for simple entry fields too.
+            form.submit();
+
+            // Set a timeout as a safety fallback in case the iframe.onload doesn't fire due to cross-origin issues
+            setTimeout(() => {
+                if (applyButton.disabled) {
+                    applyButton.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Apply Now';
+                    applyButton.disabled = false;
+                    statusMessage.textContent = "Registration attempt finished. Please check your email for confirmation.";
+                    statusMessage.className = 'mt-4 p-4 rounded-lg text-tech-dark bg-tech-accent text-center';
+                    statusMessage.classList.remove('hidden');
+                }
+            }, 3000);
+        }
+
+        // IMPORTANT WARNING TO USER:
+        console.warn("--- GOOGLE SHEET SUBMISSION WARNING ---");
+        console.warn("The form submission uses a placeholder Google Form endpoint (formResponse) which is common for connecting to Google Sheets.");
+        console.warn("To make this work in the real world, you MUST:");
+        console.warn("1. Create a Google Form linked to your sheet: https://docs.google.com/spreadsheets/d/1W5i0MFFcmeRdb1A1zd2enpJohmpq1ubwsspdE2cHDjI/edit");
+        console.warn("2. Inspect the form's HTML or submission network traffic to find the correct 'action' URL and the 'entry.ID' values for each of your fields (Name, Email, Contact Info, City).");
+        console.warn("3. Replace the placeholder 'entry.100000X' names and the form's 'action' URL in the HTML code with your real values.");
+        console.warn("--- END WARNING ---");
+
+        // --- INTERACTIVE CURSOR CIRCLE ---
+        const cursorCircle = document.getElementById('cursorCircle');
+        const interactiveElements = document.querySelectorAll('button, a, input, textarea, [role="button"], .btn-primary, .card-hover-effect, .faq-item button');
+        let mouseX = 0;
+        let mouseY = 0;
+        let circleX = 0;
+        let circleY = 0;
+        let isMouseDown = false;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorCircle.classList.add('active');
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorCircle.classList.remove('active');
+            cursorCircle.classList.remove('hovering', 'hovering-accent');
+        });
+
+        document.addEventListener('mousedown', () => {
+            isMouseDown = true;
+            cursorCircle.style.transform = `translate(-50%, -50%) scale(1.8)`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+
+        // Add hover detection for interactive elements
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursorCircle.classList.remove('hovering', 'hovering-accent');
+                if (element.classList.contains('btn-primary') || element.tagName === 'BUTTON') {
+                    cursorCircle.classList.add('hovering-accent');
+                } else {
+                    cursorCircle.classList.add('hovering');
+                }
+            });
+
+            element.addEventListener('mouseleave', () => {
+                cursorCircle.classList.remove('hovering', 'hovering-accent');
+            });
+        });
+
+        // Smooth animation loop for circle following
+        function animateCircle() {
+            circleX += (mouseX - circleX) * 0.2;
+            circleY += (mouseY - circleY) * 0.2;
+
+            cursorCircle.style.left = circleX + 'px';
+            cursorCircle.style.top = circleY + 'px';
+
+            if (!isMouseDown) {
+                cursorCircle.style.transform = `translate(-50%, -50%) scale(1)`;
+            }
+
+            requestAnimationFrame(animateCircle);
+        }
+
+        animateCircle();
+
+        // --- Typing Effect Logic ---
+        const typingPhrases = [
+            "100% FREE Webinar",
+            "Real-World AI Applications",
+            "Hands-On LLM Training",
+            "Live Expert Sessions",
+            "Career-Changing Skills"
+        ];
+
+        let currentPhrase = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 75; // milliseconds per character
+        let deletingSpeed = 35; // milliseconds per character (faster delete)
+        let pauseBetweenPhrases = 1500; // milliseconds pause before deleting
+
+        const typingTextElement = document.getElementById('typing-text');
+
+        function typeEffect() {
+            const phrase = typingPhrases[currentPhrase];
+
+            if (isDeleting) {
+                // Delete character
+                currentCharIndex--;
+                typingTextElement.textContent = phrase.substring(0, currentCharIndex);
+
+                if (currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentPhrase = (currentPhrase + 1) % typingPhrases.length;
+                    setTimeout(typeEffect, 500); // Brief pause before typing new phrase
+                } else {
+                    setTimeout(typeEffect, deletingSpeed);
+                }
+            } else {
+                // Type character
+                currentCharIndex++;
+                typingTextElement.textContent = phrase.substring(0, currentCharIndex);
+
+                if (currentCharIndex === phrase.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, pauseBetweenPhrases);
+                } else {
+                    setTimeout(typeEffect, typingSpeed);
+                }
+            }
+        }
+
+        // Start typing effect when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', typeEffect);
+        } else {
+            typeEffect();
+        }
+
+    </script>
+</body>
+
+</html>

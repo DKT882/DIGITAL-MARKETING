@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DKT Marketing — Digital Marketing Agency</title>
+    <meta name="description"
+        content="DKT Marketing — Digital marketing services: SEO, PPC, Social Media, Design. Contact us at dkt_marketing.com" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="site-header" id="home">
+        <div class="container nav-wrap">
+            <a class="brand" href="#home">dkt_marketing.com</a>
+            <nav class="main-nav" id="mainNav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#work" class="nav-link">Our Work</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link cta">Contact</a>
+            </nav>
+            <button class="nav-toggle" aria-label="Open navigation">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero" id="hero">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <h1>Grow faster with data-driven digital marketing</h1>
+                    <p class="lead">We help ambitious brands increase traffic, leads and revenue through SEO, PPC, and
+                        creative campaigns tailored to your goals.</p>
+                    <div class="hero-ctas">
+                        <a class="btn btn-primary" href="contact.html">Get a Free Audit</a>
+                        <a class="btn btn-outline" href="#services">Our Services</a>
+                    </div>
+                </div>
+                <div class="hero-art">
+                    <div class="art-card">
+                        <h3>+120% Organic Traffic</h3>
+                        <p>Achieved for an e-commerce client in 6 months.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services / info -->
+        <section id="services" class="section services container reveal">
+            <h2 class="section-title">What we do</h2>
+            <div class="grid grid-3">
+                <div class="card">
+                    <h3>SEO & Content</h3>
+                    <p>Technical SEO, content strategy, and link building to improve rankings and drive qualified
+                        traffic.</p>
+                </div>
+                <div class="card">
+                    <h3>PPC & Ads</h3>
+                    <p>Performance-driven paid advertising across Google, Microsoft and social channels to maximize ROI.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Creative & Design</h3>
+                    <p>Branding, conversion-focused design and landing pages that turn visitors into customers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="section testimonials reveal">
+            <div class="container">
+                <h2 class="section-title">Client Testimonials</h2>
+                <div class="grid grid-3">
+                    <blockquote class="testimonial">
+                        <p>“DKT Marketing transformed our traffic and leads — consistent month-over-month growth.”</p>
+                        <footer>— Sarah J., CEO</footer>
+                    </blockquote>
+                    <blockquote class="testimonial">
+                        <p>“Great communication and measurable results. Our ROAS improved dramatically.”</p>
+                        <footer>— Mark L., Head of Growth</footer>
+                    </blockquote>
+                    <blockquote class="testimonial">
+                        <p>“They built a landing page that converted at 12% — exceptional work.”</p>
+                        <footer>— Priya R., Product Manager</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta reveal">
+            <div class="container cta-inner">
+                <h2>Ready to scale your marketing?</h2>
+                <p>Book a free strategy call and get a tailored plan for your growth.</p>
+                <a class="btn btn-primary large" href="#contact">Book a Free Call</a>
+            </div>
+        </section>
+
+        <!-- Short contact form -->
+        <section id="work" class="section container reveal">
+            <h2 class="section-title">Selected Projects</h2>
+            <p>Case studies highlighting our results and approach.</p>
+            <div class="grid grid-3">
+                <article class="project">
+                    <h3>E-commerce growth</h3>
+                    <p>SEO + CRO: +120% organic traffic, +30% conversion rate.</p>
+                </article>
+                <article class="project">
+                    <h3>SaaS launch</h3>
+                    <p>Paid acquisition + content strategy to reduce CAC and increase trials.</p>
+                </article>
+                <article class="project">
+                    <h3>Brand refresh</h3>
+                    <p>Design + messaging to increase user engagement and retention.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="about" class="section container reveal">
+            <h2 class="section-title">About DKT Marketing</h2>
+            <p>We are a small, nimble digital marketing team focused on measurable growth. Our services combine
+                strategy, creative and technical execution to drive results for B2B and e-commerce businesses.</p>
+            <h3>Our Approach</h3>
+            <ul>
+                <li>Research & discovery to understand goals and audience</li>
+                <li>Data-driven strategies with clear KPIs</li>
+                <li>Transparent reporting and continuous optimization</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="section contact-short container reveal">
+            <h2 class="section-title">Contact Us</h2>
+            <form class="contact-grid" action="#" method="post" id="contactForm">
+                <input name="name" placeholder="Your name" required>
+                <input type="email" name="email" placeholder="Email address" required>
+                <input name="company" placeholder="Company (optional)">
+                <textarea name="message" placeholder="Tell us about your goals" rows="4" required></textarea>
+                <button class="btn btn-primary" type="submit">Send Message</button>
+            </form>
+            <div id="contactSuccess" class="contact-success" role="status" aria-live="polite" hidden>
+                Thanks — we received your message. We'll be in touch within 1 business day.
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <strong>dkt_marketing.com</strong>
+                <p>Digital marketing agency — SEO, PPC, Social & Creative</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="our-work.html">Our Work</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+        <div class="container copyright">© <span id="year"></span> DKT Marketing</div>
+    </footer>
+
+    <script>
+        // Set year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile nav toggle
+        const toggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('.main-nav');
+        toggle && toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+        // Smooth scroll handled by CSS `scroll-behavior`, but implement scrollspy and active link
+        const navLinks = document.querySelectorAll('.main-nav .nav-link');
+        const sections = document.querySelectorAll('main section[id]');
+
+        function onScroll() {
+            const scrollPos = window.scrollY + 120; // offset for header
+            let currentId = 'home';
+            sections.forEach(sec => {
+                if (sec.offsetTop <= scrollPos) currentId = sec.id;
+            });
+            navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${currentId}`));
+        }
+        window.addEventListener('scroll', onScroll);
+        onScroll();
+
+        // Reveal on scroll
+        const revealElems = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObserver.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        revealElems.forEach(el => revealObserver.observe(el));
+
+        // Newsletter & contact form handling (demo: prevent default and show success)
+        document.getElementById('newsletter')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thanks! Newsletter signup received. (Demo)');
+            e.target.reset();
+        });
+
+        document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In real site, send to endpoint or form service here
+            document.getElementById('contactSuccess').hidden = false;
+            e.target.reset();
+            setTimeout(() => { document.getElementById('contactSuccess').hidden = true; }, 7000);
+            // Close mobile nav after send
+            nav.classList.remove('open');
+            window.scrollTo({ top: document.getElementById('contact').offsetTop - 80, behavior: 'smooth' });
+        });
+
+        // Close mobile nav when clicking link
+        navLinks.forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+    </script>
+</body>
+
+</html>
